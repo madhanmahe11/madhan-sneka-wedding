@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Madhan & Sneka | Save The Date</title>
+    <!-- Modern & Cinematic Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&family=Tiro+Tamil:ital@1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --gold: #dfb868;
+            --dark-maroon: #4a0404;
+            --text-light: #f8f8f8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            background-color: var(--dark-maroon);
+            overflow-x: hidden;
+            /* Cinematic DSLR Bokeh Background */
+            background-image: linear-gradient(rgba(74, 4, 4, 0.7), rgba(0, 0, 0, 0.8)), 
+                              url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        /* Glassmorphism Utility */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .pre-title {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .names {
+            font-family: 'Alex Brush', cursive;
+            font-size: 5.5rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background: linear-gradient(to right, #fff, #dfb868, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tamil-quote {
+            font-family: 'Tiro Tamil', serif;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            margin: 20px 0 40px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px 100px 20px; /* Bottom padding for sticky nav */
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Event Card */
+        .event-card {
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .date {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .time {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 20px;
+        }
+
+        .venue-details {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Countdown */
+        .countdown-wrapper {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .count-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(223, 184, 104, 0.2);
+        }
+
+        .count-item span {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .count-item p {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Floating Action Bar (Trending Mobile UX) */
+        .action-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            z-index: 1000;
+            border-radius: 50px;
+        }
+
+        .action-btn {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
+            transition: transform 0.2s;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            color: var(--gold);
+        }
+
+        .action-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Gallery */
+        .gallery-container {
+            column-count: 2;
+            column-gap: 15px;
+            padding: 20px 0;
+        }
+
+        .gallery-img {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            break-inside: avoid;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 480px) {
+            .names { font-size: 4rem; }
+            .date { font-size: 1.5rem; }
+            .count-item span { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="fade-in">
+            <div class="pre-title">You are invited</div>
+            <h1 class="names">Madhan<br>&<br>Sneka</h1>
+            <p class="tamil-quote">மண்ணில் இந்தக் காதலன்றி யாரும் வாழ்தல் கூடுமோ...</p>
+            <p class="pre-title" style="font-size: 0.8rem; margin-top: 30px;">Scroll to explore</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Event Details Card -->
+        <div class="event-card glass fade-in">
+            <h2 class="event-title">The Wedding</h2>
+            <div class="date">Friday, Nov 13, 2026</div>
+            <div class="time">09:00 AM – 10:15 AM</div>
+            
+            <div class="countdown-wrapper" id="countdown">
+                <div class="count-item"><span id="days">00</span><p>Days</p></div>
+                <div class="count-item"><span id="hours">00</span><p>Hours</p></div>
+                <div class="count-item"><span id="minutes">00</span><p>Mins</p></div>
+                <div class="count-item"><span id="seconds">00</span><p>Secs</p></div>
+            </div>
+
+            <div class="venue-details" style="margin-top: 30px;">
+                <strong style="color: var(--gold); font-size: 1.2rem;">Ambal Mahal</strong><br><br>
+                170, Sannathi St, Punnainallur,<br>
+                Mariamman Kovil, Perumalkoil,<br>
+                Thanjavur, Tamil Nadu 613501
+            </div>
+        </div>
+
+        <!-- Modern Masonry Gallery -->
+        <div class="fade-in" style="text-align: center;">
+            <h2 class="event-title" style="margin-bottom: 10px;">Glimpses</h2>
+            <div class="gallery-container">
+                <img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=400&q=80" class="gallery-img glass">
+                <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=400&q=80" class="gallery-img glass">
+                <img src="https://images.unsplash.com/photo-1610173827002-60cc541e21b2?auto=format&fit=crop&w=400&q=80" class="gallery-img glass">
+                <img src="https://images.unsplash.com/photo-1583089892943-e02e52f17d05?auto=format&fit=crop&w=400&q=80" class="gallery-img glass">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Bottom Action Bar -->
+    <div class="action-bar glass fade-in">
+        <a href="https://maps.app.goo.gl/1U1P6Gz7gZN8QB717" target="_blank" class="action-btn">
+            <span class="action-icon">📍</span>
+            <span>Maps</span>
+        </a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Madhan+and+Sneka's+Wedding&dates=20261113T033000Z/20261113T044500Z&location=Ambal+Mahal,+Thanjavur" target="_blank" class="action-btn">
+            <span class="action-icon">📅</span>
+            <span>Calendar</span>
+        </a>
+        <button class="action-btn" id="musicBtn" onclick="toggleMusic()">
+            <span class="action-icon" id="musicIcon">🎵</span>
+            <span id="musicText">Play Music</span>
+        </button>
+    </div>
+
+    <script>
+        // Smooth Scroll Fade-in Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+        // Countdown Timer
+        const countDownDate = new Date("Nov 13, 2026 09:00:00").getTime();
+        
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<div style='grid-column: span 4; font-size: 1.5rem; color: var(--gold);'>Just Married!</div>";
+                return;
+            }
+
+            document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // Music Toggle
+        const music = document.getElementById("bgMusic");
+        const musicIcon = document.getElementById("musicIcon");
+        const musicText = document.getElementById("musicText");
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.innerText = "🎵";
+                musicText.innerText = "Play Music";
+            } else {
+                music.play();
+                musicIcon.innerText = "⏸️";
+                musicText.innerText = "Pause";
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</body>
+</html>
